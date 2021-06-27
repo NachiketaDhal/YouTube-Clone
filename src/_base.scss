@@ -21,4 +21,14 @@ body {
   background-attachment: fixed;
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.1px;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+}
+
+@mixin line-clamp($number) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $number;
+  -webkit-box-orient: vertical;
 }
