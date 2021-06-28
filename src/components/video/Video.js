@@ -1,30 +1,82 @@
-import React from 'react';
+import moment from 'moment';
+import numeral from 'numeral';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { AiFillEye } from 'react-icons/ai';
 
+import request from '../../api';
 import './_video.scss';
 
-const Video = () => {
+const Video = ({ video }) => {
+  const {
+    id,
+    snippet: {
+      channelId,
+      channelTitle,
+      title,
+      publishedAt,
+      thumbnails: { medium },
+    },
+  } = video;
+
+  const [views, setViews] = useState(null);
+  const [duration, setDuration] = useState(null);
+  const [channelIcon, setChannelIcon] = useState(null);
+
+  const seconds = moment.duration(duration).asSeconds();
+  const _duration = moment.utc(seconds * 1000).format('mm:ss');
+
+  useEffect(() => {
+    const get_video_details = async () => {
+      const {
+        data: { items },
+      } = await request.get('/videos', {
+        params: {
+          part: 'contentDetails,statistics',
+          id: id,
+        },
+      });
+      // console.log(items);
+
+      setDuration(items[0].contentDetails.duration);
+      setViews(items[0].statistics.viewCount);
+    };
+    get_video_details();
+  }, [id]);
+
+  useEffect(() => {
+    const get_channel_icon = async () => {
+      const {
+        data: { items },
+      } = await request.get('/channels', {
+        params: {
+          part: 'snippet',
+          id: channelId,
+        },
+      });
+      console.log(items);
+
+      setChannelIcon(items[0].snippet.thumbnails.default.url);
+    };
+    get_channel_icon();
+  }, [channelId]);
+
   return (
     <div className="video">
       <div className="video__top">
-        <img
-          src="https://i.ytimg.com/vi/q2Cs5_Z3ZF0/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLBcZCCpGiHmhx7XoBV7R1oBTWt8Bw"
-          alt="thumbnail"
-        />
-        <span>05:43</span>
+        <img src={medium.url} alt="thumbnail" />
+        <span>{_duration}</span>
       </div>
-      <div className="video__title">Make your Favourite juice of Summer!</div>
+      <div className="video__title">{title}</div>
       <div className="video__details">
         <span>
-          <AiFillEye /> 5M views • <span> 9 days ago</span>
+          <AiFillEye /> {numeral(views).format('0.a')} views •{' '}
+          <span> {moment(publishedAt).fromNow()}</span>
         </span>
       </div>
       <div className="video__channel">
-        <img
-          src="https://yt3.ggpht.com/ytc/AKedOLTNdI-Z0GXz354JTmGNCT5Z1IO9RpEMEjQ-Hab1lg=s88-c-k-c0x00ffffff-no-rj"
-          alt="channel"
-        />
-        <p>Ultimate Juice Makers</p>
+        <img src={channelIcon} alt="channel" />
+        <p>{channelTitle}</p>
       </div>
     </div>
   );
