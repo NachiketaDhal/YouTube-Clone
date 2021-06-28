@@ -1,0 +1,31 @@
+@import '../../base';
+
+.login {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  &__container {
+    height: 300px;
+    padding: 1rem;
+    border-radius: 10px;
+    background: $black-secondary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 150px;
+      margin-bottom: 1rem;
+    }
+    button {
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      border: none;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+}
