@@ -3,6 +3,9 @@ import {
   HOME_VIDEOS_FAILED,
   HOME_VIDEOS_REQUEST,
   HOME_VIDEOS_SUCCESS,
+  SELECTED_VIDEOS_FAILED,
+  SELECTED_VIDEOS_REQUEST,
+  SELECTED_VIDEOS_SUCCESS,
 } from '../actionTypes';
 
 export const getMostPopularVideos = () => async (dispatch, getState) => {
@@ -43,7 +46,7 @@ export const getVideosByCategory = keyword => async (dispatch, getState) => {
     dispatch({
       type: HOME_VIDEOS_REQUEST,
     });
-    const { data } = await request('/search', {
+    const { data } = await request.get('/search', {
       params: {
         part: 'snippet',
         maxResults: 20,
@@ -69,3 +72,38 @@ export const getVideosByCategory = keyword => async (dispatch, getState) => {
     });
   }
 };
+
+export const getVideoById = id => async dispatch => {
+  try {
+    dispatch({ type: SELECTED_VIDEOS_REQUEST });
+
+    const { data } = await request.get('/videos', {
+      params: {
+        part: 'snippet,statistics',
+        id: id,
+      },
+    });
+
+    dispatch({ type: SELECTED_VIDEOS_SUCCESS, payload: data.items[0] });
+  } catch (error) {
+    console.log(error.message);
+    dispatch({ type: SELECTED_VIDEOS_FAILED, payload: error.message });
+  }
+};
+// export const getRelatedVideos = id => async dispatch => {
+//   try {
+//     dispatch({ type: SELECTED_VIDEOS_REQUEST });
+
+//     const { data } = await request.get('/videos', {
+//       params: {
+//         part: 'snippet,statistics',
+//         id: id,
+//       },
+//     });
+
+//     dispatch({ type: SELECTED_VIDEOS_SUCCESS, payload: data.items[0] });
+//   } catch (error) {
+//     console.log(error.message);
+//     dispatch({ type: SELECTED_VIDEOS_FAILED, payload: error.message });
+//   }
+// };

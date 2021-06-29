@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Col, Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import SkeletonVideo from '../../components/skeleton/SkeletonVideo';
@@ -31,7 +31,7 @@ const HomeScreen = () => {
   return (
     <Container>
       <CategoriesBar />
-      <InfiniteScroll
+      {/* <InfiniteScroll
         dataLength={videos.length}
         next={fetchData}
         hasMore={true}
@@ -39,10 +39,11 @@ const HomeScreen = () => {
           <div className="spinner-border text-danger d-block mx-auto"></div>
         }
         className="row"
-      >
+      > */}
+      <Row>
         {!loading
-          ? videos.map(video => (
-              <Col lg={3} md={4} key={video.id}>
+          ? videos.map((video, i) => (
+              <Col lg={3} md={4} key={i}>
                 <Video video={video} />
               </Col>
             ))
@@ -51,7 +52,8 @@ const HomeScreen = () => {
                 <SkeletonVideo />
               </Col>
             ))}
-      </InfiniteScroll>
+      </Row>
+      {/* </InfiniteScroll> */}
     </Container>
   );
 };

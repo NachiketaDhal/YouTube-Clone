@@ -8,6 +8,7 @@ import Header from './components/header/Header';
 import Sidebar from './components/sidebar/Sidebar';
 import HomeScreen from './screen/homeScreen/HomeScreen';
 import LoginScreen from './screen/loginScreen/LoginScreen';
+import WatchScreen from './screen/watchScreen/WatchScreen';
 import './_app.scss';
 
 const Layout = ({ children }) => {
@@ -38,11 +39,8 @@ const App = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (!accessToken || !loading) {
+    if (!accessToken && !loading) {
       history.push('/login');
-    }
-    if (accessToken) {
-      history.push('/');
     }
   }, [accessToken, loading, history]);
 
@@ -57,6 +55,11 @@ const App = () => {
       <Route path="/search" exact>
         <Layout>
           <h1>Search Page</h1>
+        </Layout>
+      </Route>
+      <Route path="/watch/:id" exact>
+        <Layout>
+          <WatchScreen />
         </Layout>
       </Route>
       <Route path="*">
