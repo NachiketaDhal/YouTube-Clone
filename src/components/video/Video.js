@@ -3,6 +3,7 @@ import numeral from 'numeral';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { AiFillEye } from 'react-icons/ai';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import request from '../../api';
 import './_video.scss';
@@ -66,8 +67,9 @@ const Video = ({ video }) => {
   return (
     <div className="video">
       <div className="video__top">
-        <img src={medium.url} alt="thumbnail" />
-        <span>{_duration}</span>
+        <LazyLoadImage src={medium.url} effect="blur" />
+        {/* <img src={medium.url} alt="thumbnail" /> */}
+        <span className="video__top__duration">{_duration}</span>
       </div>
       <div className="video__title">{title}</div>
       <div className="video__details">
@@ -77,7 +79,8 @@ const Video = ({ video }) => {
         </span>
       </div>
       <div className="video__channel">
-        <img src={channelIcon} alt="channel" />
+        <LazyLoadImage src={channelIcon} effect="blur" />
+        {/* <img src={channelIcon} alt="channel" /> */}
         <p>{channelTitle}</p>
       </div>
     </div>

@@ -15,7 +15,10 @@
     img {
       width: 100%;
     }
-    span {
+    .lazy-load-image-background {
+      width: 100%;
+    }
+    &__duration {
       position: absolute;
 
       bottom: 0.3rem;
