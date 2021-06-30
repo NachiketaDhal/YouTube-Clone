@@ -31,7 +31,7 @@ export const getMostPopularVideos = () => async (dispatch, getState) => {
       },
     });
 
-    console.log(res);
+    // console.log(res);
   } catch (error) {
     console.log(error.message);
     dispatch({

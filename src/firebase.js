@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyANbjnB29yQMQWAsaqsvyOHRhMTWchGQPg',
+  apiKey: process.env.REACT_APP_YT_API_KEY,
   authDomain: 'ytclone-react-nachiketa.firebaseapp.com',
   projectId: 'ytclone-react-nachiketa',
   storageBucket: 'ytclone-react-nachiketa.appspot.com',
