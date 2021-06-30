@@ -7,7 +7,7 @@ import Comments from '../../components/comments/Comments';
 import VideoHorizontal from '../../components/videoHorizontal/VideoHorizontal';
 import VideoMetaData from '../../components/videoMetaData/VideoMetaData';
 import {
-  // getRelatedVideos,
+  getRelatedVideos,
   getVideoById,
 } from '../../redux/actions/videos.action';
 import './_watchScreen.scss';
@@ -20,12 +20,12 @@ const WatchScreen = () => {
   useEffect(() => {
     dispatch(getVideoById(id));
 
-    // dispatch(getRelatedVideos(id));
+    dispatch(getRelatedVideos(id));
   }, [dispatch, id]);
 
-  // const { videos, loading: relatedVideosLoading } = useSelector(
-  //   state => state.relatedVideos
-  // );
+  const { videos, loading: relatedVideosLoading } = useSelector(
+    state => state.relatedVideos
+  );
 
   const { video, loading } = useSelector(state => state.selectedVideo);
 
@@ -54,16 +54,15 @@ const WatchScreen = () => {
         />
       </Col>
       <Col lg={4}>
-        {
-          [...Array(20)].map((video, i) => (
-            <VideoHorizontal video={video} key={i} />
-          ))
-          // : (
-          //   <SkeletonTheme color="#343a40" highlightColor="#3c4147">
-          //     <Skeleton width="100%" height="130px" count={15} />
-          //   </SkeletonTheme>
-          // )
-        }
+        {!relatedVideosLoading ? (
+          videos
+            ?.filter(v => v.snippet)
+            ?.map((video, i) => <VideoHorizontal video={video} key={i} />)
+        ) : (
+          <SkeletonTheme color="#343a40" highlightColor="#3c4147">
+            <Skeleton width="100%" height="130px" count={15} />
+          </SkeletonTheme>
+        )}
       </Col>
     </Row>
   );

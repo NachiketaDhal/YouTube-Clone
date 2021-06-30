@@ -22,8 +22,9 @@
     position: absolute;
 
     bottom: 0.3rem;
-    right: 0.3rem;
+    right: 1rem;
 
+    font-size: 0.9rem;
     padding: 0.2rem;
     background: #080808ec;
     border-radius: 3px;
@@ -39,7 +40,7 @@
     color: #fff;
     letter-spacing: 0.3px;
 
-    @include line-clamp(1);
+    @include line-clamp(2);
   }
 
   &__channel {
