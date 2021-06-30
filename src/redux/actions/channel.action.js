@@ -23,6 +23,7 @@ export const getChannelDetails = id => async dispatch => {
     dispatch({ type: CHANNEL_DETAILS_FAILED, payload: error.response.data });
   }
 };
+
 export const checkSubscriptionStatus = id => async (dispatch, getState) => {
   try {
     const { data } = await request.get('/subscriptions', {

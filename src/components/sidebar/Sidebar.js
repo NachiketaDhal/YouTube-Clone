@@ -26,10 +26,12 @@ const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
       className={isSideBarOpen ? 'sidebar open' : 'sidebar'}
       onClick={() => setIsSideBarOpen(false)}
     >
-      <li>
-        <MdHome size={23} />
-        <span>Home</span>
-      </li>
+      <Link to="/">
+        <li>
+          <MdHome size={23} />
+          <span>Home</span>
+        </li>
+      </Link>
 
       <Link to="/feed/subscriptions">
         <li>

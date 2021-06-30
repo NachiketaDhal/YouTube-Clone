@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 import request from '../../api';
 import './_video.scss';
 
-const Video = ({ video }) => {
+const Video = ({ video, channelScreen }) => {
   const {
     id,
     snippet: {
@@ -19,6 +19,7 @@ const Video = ({ video }) => {
       publishedAt,
       thumbnails: { medium },
     },
+    contentDetails,
   } = video;
 
   const [views, setViews] = useState(null);
@@ -28,7 +29,7 @@ const Video = ({ video }) => {
   const seconds = moment.duration(duration).asSeconds();
   const _duration = moment.utc(seconds * 1000).format('mm:ss');
 
-  const _videoId = id?.videoId || id;
+  const _videoId = id?.videoId || contentDetails?.videoId || id;
   const history = useHistory();
 
   useEffect(() => {
@@ -84,11 +85,13 @@ const Video = ({ video }) => {
           <span> {moment(publishedAt).fromNow()}</span>
         </span>
       </div>
-      <div className="video__channel">
-        <LazyLoadImage src={channelIcon} effect="blur" />
-        {/* <img src={channelIcon} alt="channel" /> */}
-        <p>{channelTitle}</p>
-      </div>
+      {!channelScreen && (
+        <div className="video__channel">
+          <LazyLoadImage src={channelIcon} effect="blur" />
+          {/* <img src={channelIcon} alt="channel" /> */}
+          <p>{channelTitle}</p>
+        </div>
+      )}
     </div>
   );
 };

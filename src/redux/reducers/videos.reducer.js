@@ -1,4 +1,7 @@
 import {
+  CHANNEL_VIDEOS_FAILED,
+  CHANNEL_VIDEOS_REQUEST,
+  CHANNEL_VIDEOS_SUCCESS,
   HOME_VIDEOS_FAILED,
   HOME_VIDEOS_REQUEST,
   HOME_VIDEOS_SUCCESS,
@@ -125,6 +128,27 @@ export const subscriptionChannelReducer = (
     case SUBSCRIPTION_CHANNEL_SUCCESS:
       return { ...state, loading: false, channels: payload };
     case SUBSCRIPTION_CHANNEL_FAILED:
+      return { ...state, loading: false, error: payload };
+    default:
+      return state;
+  }
+};
+
+export const channelVideosReducer = (
+  state = {
+    loading: true,
+    videos: null,
+  },
+  action
+) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case CHANNEL_VIDEOS_REQUEST:
+      return { ...state, loading: true };
+    case CHANNEL_VIDEOS_SUCCESS:
+      return { ...state, loading: false, videos: payload };
+    case CHANNEL_VIDEOS_FAILED:
       return { ...state, loading: false, error: payload };
     default:
       return state;
