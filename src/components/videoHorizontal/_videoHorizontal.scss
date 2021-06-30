@@ -13,6 +13,11 @@
   &__thumbnail {
     width: 100%;
 
+    &-channel {
+      width: 50%;
+      border-radius: 50%;
+    }
+
     &-wrapper {
       width: 100%;
     }

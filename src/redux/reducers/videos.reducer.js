@@ -5,6 +5,9 @@ import {
   RELATED_VIDEO_FAILED,
   RELATED_VIDEO_REQUEST,
   RELATED_VIDEO_SUCCESS,
+  SEARCH_VIDEO_FAILED,
+  SEARCH_VIDEO_REQUEST,
+  SEARCH_VIDEO_SUCCESS,
   SELECTED_VIDEOS_FAILED,
   SELECTED_VIDEOS_REQUEST,
   SELECTED_VIDEOS_SUCCESS,
@@ -61,6 +64,7 @@ export const selectedVideoReducer = (
       return state;
   }
 };
+
 export const relatedVideoReducer = (
   state = {
     loading: true,
@@ -76,6 +80,27 @@ export const relatedVideoReducer = (
     case RELATED_VIDEO_SUCCESS:
       return { ...state, loading: false, videos: payload };
     case RELATED_VIDEO_FAILED:
+      return { ...state, loading: false, error: payload };
+    default:
+      return state;
+  }
+};
+
+export const searchVideoReducer = (
+  state = {
+    loading: true,
+    videos: null,
+  },
+  action
+) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case SEARCH_VIDEO_REQUEST:
+      return { ...state, loading: true };
+    case SEARCH_VIDEO_SUCCESS:
+      return { ...state, loading: false, videos: payload };
+    case SEARCH_VIDEO_FAILED:
       return { ...state, loading: false, error: payload };
     default:
       return state;

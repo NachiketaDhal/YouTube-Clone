@@ -8,6 +8,7 @@ import Header from './components/header/Header';
 import Sidebar from './components/sidebar/Sidebar';
 import HomeScreen from './screen/homeScreen/HomeScreen';
 import LoginScreen from './screen/loginScreen/LoginScreen';
+import SearchScreen from './screen/searchScreen/SearchScreen';
 import WatchScreen from './screen/watchScreen/WatchScreen';
 import './_app.scss';
 
@@ -52,12 +53,17 @@ const App = () => {
         </Layout>
       </Route>
       <Route path="/login" exact component={LoginScreen} />
-      <Route path="/search" exact>
+      <Route path="/search/:query" exact>
         <Layout>
-          <h1>Search Page</h1>
+          <SearchScreen />
         </Layout>
       </Route>
       <Route path="/watch/:id" exact>
+        <Layout>
+          <WatchScreen />
+        </Layout>
+      </Route>
+      <Route path="/feed/subscription" exact>
         <Layout>
           <WatchScreen />
         </Layout>
