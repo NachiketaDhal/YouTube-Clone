@@ -12,6 +12,9 @@ import {
   SELECTED_VIDEOS_FAILED,
   SELECTED_VIDEOS_REQUEST,
   SELECTED_VIDEOS_SUCCESS,
+  SUBSCRIPTION_CHANNEL_FAILED,
+  SUBSCRIPTION_CHANNEL_REQUEST,
+  SUBSCRIPTION_CHANNEL_SUCCESS,
 } from '../actionTypes';
 
 export const getMostPopularVideos = () => async (dispatch, getState) => {
@@ -142,6 +145,33 @@ export const getVideosBySearch = keyword => async dispatch => {
     dispatch({
       type: SEARCH_VIDEO_FAILED,
       payload: error.message,
+    });
+  }
+};
+
+export const getSubscriptionChannel = id => async (dispatch, getState) => {
+  try {
+    dispatch({ type: SUBSCRIPTION_CHANNEL_REQUEST });
+    const { data } = await request.get('/subscriptions', {
+      params: {
+        part: 'snippet,contentDetails',
+        mine: true,
+      },
+      headers: {
+        Authorization: `Bearer ${getState().auth.accessToken}`,
+      },
+    });
+
+    dispatch({
+      type: SUBSCRIPTION_CHANNEL_SUCCESS,
+      payload: data.items,
+    });
+    // console.log(data);
+  } catch (error) {
+    console.log(error.response.data);
+    dispatch({
+      type: SUBSCRIPTION_CHANNEL_FAILED,
+      payload: error.response.data,
     });
   }
 };

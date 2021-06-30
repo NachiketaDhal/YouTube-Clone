@@ -11,6 +11,9 @@ import {
   SELECTED_VIDEOS_FAILED,
   SELECTED_VIDEOS_REQUEST,
   SELECTED_VIDEOS_SUCCESS,
+  SUBSCRIPTION_CHANNEL_FAILED,
+  SUBSCRIPTION_CHANNEL_REQUEST,
+  SUBSCRIPTION_CHANNEL_SUCCESS,
 } from '../actionTypes';
 
 const initialState = {
@@ -101,6 +104,27 @@ export const searchVideoReducer = (
     case SEARCH_VIDEO_SUCCESS:
       return { ...state, loading: false, videos: payload };
     case SEARCH_VIDEO_FAILED:
+      return { ...state, loading: false, error: payload };
+    default:
+      return state;
+  }
+};
+
+export const subscriptionChannelReducer = (
+  state = {
+    loading: true,
+    channels: null,
+  },
+  action
+) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case SUBSCRIPTION_CHANNEL_REQUEST:
+      return { ...state, loading: true };
+    case SUBSCRIPTION_CHANNEL_SUCCESS:
+      return { ...state, loading: false, channels: payload };
+    case SUBSCRIPTION_CHANNEL_FAILED:
       return { ...state, loading: false, error: payload };
     default:
       return state;

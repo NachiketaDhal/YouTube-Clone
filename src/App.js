@@ -9,6 +9,7 @@ import Sidebar from './components/sidebar/Sidebar';
 import HomeScreen from './screen/homeScreen/HomeScreen';
 import LoginScreen from './screen/loginScreen/LoginScreen';
 import SearchScreen from './screen/searchScreen/SearchScreen';
+import SubscriptionScreen from './screen/subscriptionScreen/SubscriptionScreen';
 import WatchScreen from './screen/watchScreen/WatchScreen';
 import './_app.scss';
 
@@ -63,10 +64,13 @@ const App = () => {
           <WatchScreen />
         </Layout>
       </Route>
-      <Route path="/feed/subscription" exact>
+      <Route path="/feed/subscriptions" exact>
         <Layout>
-          <WatchScreen />
+          <SubscriptionScreen />
         </Layout>
+      </Route>
+      <Route path="/channel/:channelId" exact>
+        <Layout>Channel Screen</Layout>
       </Route>
       <Route path="*">
         <Redirect to="/" />
