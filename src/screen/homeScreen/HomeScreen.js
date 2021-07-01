@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Col, Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import Video from '../../components/video/Video';
 import CategoriesBar from '../../components/categoriesBar/CategoriesBar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,9 +30,10 @@ const HomeScreen = () => {
 
   return (
     <Container>
-      <CategoriesBar />
+      <Row>
+        <CategoriesBar />
 
-      {/* <InfiniteScroll
+        {/* <InfiniteScroll
         dataLength={videos.length}
         next={fetchData}
         hasMore={true}
@@ -41,18 +42,19 @@ const HomeScreen = () => {
         }
         className="row"
       > */}
-      {!loading
-        ? videos.map(video => (
-            <Col lg={3} md={4}>
-              <Video video={video} key={video.id} />
-            </Col>
-          ))
-        : [...Array(20)].map(() => (
-            <Col lg={3} md={4}>
-              <SkeletonVideo />
-            </Col>
-          ))}
-      {/* </InfiniteScroll> */}
+        {!loading
+          ? videos.map((video, i) => (
+              <Col lg={3} md={4}>
+                <Video video={video} key={i} />
+              </Col>
+            ))
+          : [...Array(20)].map((_, i) => (
+              <Col lg={3} md={4} key={i}>
+                <SkeletonVideo />
+              </Col>
+            ))}
+        {/* </InfiniteScroll> */}
+      </Row>
     </Container>
   );
 };
