@@ -17,9 +17,10 @@ const HomeScreen = () => {
     dispatch(getMostPopularVideos());
   }, [dispatch]);
 
-  const { videos, activeCategory, loading } = useSelector(
-    state => state.homeVideos
-  );
+  const { videos, loading } = useSelector(state => state.homeVideos);
+  // const {  activeCategory, } = useSelector(
+  //   state => state.homeVideos
+  // );
 
   // const fetchData = () => {
   //   if (activeCategory === 'All') dispatch(getMostPopularVideos());
