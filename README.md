@@ -6,7 +6,7 @@ This app is a demo replica of YouTube (using the youtube api) that I decided to 
 
 #### Login Page:
 
-<img src="https://github.com/NachiketaDhal/YT-Clone/blob/master/src/screenshots/LOGIN.pnghttps://github.com/NachiketaDhal/YT-Clone/blob/master/src/screenshots/LOGIN.png" width="640">
+<img src="https://github.com/NachiketaDhal/YT-Clone/blob/master/src/screenshots/LOGIN.png" width="640">
 
 #### Home Page:
 
