@@ -17,7 +17,7 @@ const Header = ({ handleToggleSidebar }) => {
     history.push(`/search/${inputValue}`);
   };
 
-  const { photoURL } = useSelector(state => state?.auth?.user);
+  const photoURL = useSelector(state => state?.auth?.user?.photoURL);
 
   return (
     <div className="border border-dark header">

@@ -25,7 +25,7 @@ const Comments = ({ videoId, totalComments }) => {
     comment => comment.snippet.topLevelComment.snippet
   );
 
-  const { photoURL } = useSelector(state => state?.auth?.user);
+  const photoURL = useSelector(state => state?.auth?.user?.photoURL);
 
   useEffect(() => {
     dispatch(getCommentsByVideoId(videoId));

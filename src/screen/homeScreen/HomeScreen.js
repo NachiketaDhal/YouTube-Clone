@@ -45,7 +45,7 @@ const HomeScreen = () => {
       > */}
         {!loading
           ? videos.map((video, i) => (
-              <Col lg={3} md={4}>
+              <Col lg={3} md={4} key={i}>
                 <Video video={video} key={i} />
               </Col>
             ))
