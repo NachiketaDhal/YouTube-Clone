@@ -26,6 +26,7 @@ jobs:
         run: npm run build
         env:
           CI: false
+          REACT_APP_YT_API_KEY: ${{secrets.REACT_APP_YT_API_KEY}}
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
